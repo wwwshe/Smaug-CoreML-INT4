@@ -1,0 +1,60 @@
+Smaug-CoreML-INT4
+Copyright 2026 wwwshe1
+
+This repository contains Core ML conversions of components of
+Smaug-AI-Image-Detector. The converted model files are a derivative work of
+the original model weights and are distributed under the Apache License,
+Version 2.0 (see LICENSE).
+
+-------------------------------------------------------------------------------
+Original model
+-------------------------------------------------------------------------------
+
+Smaug-AI-Image-Detector
+  Author:   Abacus.AI
+  Source:   https://huggingface.co/abacusai/Smaug-AI-Image-Detector
+  Revision: c7c95951e04a87b884a4ad479401b1128c3903bd
+  License:  Apache License 2.0
+
+Base model of Smaug-AI-Image-Detector:
+
+EmbeddingGemma-2
+  Author:   Google DeepMind
+  Source:   https://huggingface.co/google/embeddinggemma-2
+  License:  Apache License 2.0
+  Usage:    The model card asks deployers to follow the Gemma Prohibited Use
+            Policy: https://ai.google.dev/gemma/prohibited_use_policy
+
+Neither upstream repository ships a NOTICE file. This NOTICE file is provided
+to record attribution and modifications as required by Section 4 of the
+Apache License 2.0.
+
+-------------------------------------------------------------------------------
+Modifications
+-------------------------------------------------------------------------------
+
+The original PyTorch / sentence-transformers model was modified as follows:
+
+  * Three sub-modules were extracted from the original model: the vision
+    tower, the multimodal embedder (embed_vision) and the language model.
+  * Each sub-module was exported with torch.export and converted to the
+    Core ML ML Program format (coremltools 9.0, FP32 compute precision,
+    minimum deployment target iOS 18). For the vision tower and the language
+    model, aten.__and__.Tensor graph nodes were rewritten to
+    aten.logical_and.default before conversion.
+  * The weights of the converted models were quantized to 4-bit integers
+    (linear symmetric, per-block, block size 32) with
+    coremltools.optimize.coreml.linear_quantize_weights.
+  * The tokenizer, the token embedding lookup for special tokens, the image
+    preprocessing, the pooling / normalization / dense classification head
+    and the final sigmoid are NOT included in the converted files.
+
+-------------------------------------------------------------------------------
+Trademarks
+-------------------------------------------------------------------------------
+
+"Smaug" and "Abacus.AI" are associated with Abacus.AI. "Gemma" and "Google"
+are trademarks of Google LLC. "Core ML" and "Apple" are trademarks of
+Apple Inc. These names are used only to describe the origin and format of the
+files. This project is not affiliated with, endorsed by, or sponsored by
+Abacus.AI, Google, or Apple.

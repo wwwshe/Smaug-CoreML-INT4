@@ -1,0 +1,51 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.venv-*/
+venv/
+env/
+.python-version
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Hugging Face / tool caches
+.cache/
+hf_cache/
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Intermediate / full-precision conversions (not distributed)
+SmaugVision.mlpackage/
+SmaugEmbedder.mlpackage/
+SmaugLanguage.mlpackage/
+coreml_test.mlpackage/
+*.mlmodelc/
+
+# Local inputs, logs and scratch output
+test.png
+*.log
+pipeline_info.txt
+tmp/
+scratch/
+
+# Original PyTorch weights (download from Hugging Face instead)
+*.safetensors
+*.bin
+!*.mlpackage/Data/com.apple.CoreML/weights/*.bin
+
+# Release archives
+*.zip

@@ -1,0 +1,12 @@
+# Core ML weight blobs: SmaugVision ~100 MB, SmaugLanguage ~83 MB.
+# GitHub warns above 50 MiB and blocks files above 100 MiB without Git LFS.
+*.mlpackage/Data/com.apple.CoreML/weights/*.bin filter=lfs diff=lfs merge=lfs -text
+*.mlpackage/Data/com.apple.CoreML/*.mlmodel filter=lfs diff=lfs merge=lfs -text
+
+# Keep the package manifests as normal text files
+*.mlpackage/Manifest.json text eol=lf
+
+*.py text eol=lf
+*.md text eol=lf
+LICENSE text eol=lf
+NOTICE text eol=lf
